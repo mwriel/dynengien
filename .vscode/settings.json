@@ -1,0 +1,48 @@
+{
+    "cmake.configureOnOpen": false,
+    "cmake.automaticReconfigure": false,
+    "cmake.buildDirectory": "${workspaceFolder}/build",
+    "cmake.generator": "Unix Makefiles",
+    "cmake.ignoreKitEnv": false,
+    "cmake.exportCompileCommandsFile": true,
+    "cmake.configureSettings": {
+        "CMAKE_EXPORT_COMPILE_COMANDS": "ON"
+    },
+    "[cmake]": {
+        "editor.quickSuggestions": {
+            "other": "on",
+            "comments": "on",
+            "strings": "on"
+        }
+    },
+    "cmake.configureArgs": [
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+    ],
+
+    "clangd.path": "clangd",  // O ruta completa si es necesario
+    "clangd.arguments": [
+        "--compile-commands-dir=${workspaceFolder}/out/build",
+        "--background-index",
+        "--all-scopes-completion",
+        "--completion-style=detailed",
+        "--header-insertion=iwyu",
+        "--header-insertion-decorators",
+        "--function-arg-placeholders=false",
+        "--log=verbose",
+        "--pch-storage=memory",
+        "--query-driver=C:/msys64/mingw64/bin/gcc.exe"
+    ],
+
+     "[c]": {
+        "editor.defaultFormatter": "xaver.clang-format"
+    },
+    
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": false,
+        "strings": true
+    },
+    "editor.suggest.snippetsPreventQuickSuggestions": false
+
+    
+}
