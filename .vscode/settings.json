@@ -19,7 +19,7 @@
         "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
     ],
 
-    "clangd.path": "clangd",  // O ruta completa si es necesario
+    "clangd.path": "clangd",  
     "clangd.arguments": [
         "--compile-commands-dir=${workspaceFolder}/out/build",
         "--background-index",

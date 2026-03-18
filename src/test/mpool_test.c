@@ -2,7 +2,7 @@
 #include "MPool/MPool.h"
 int main(){
 
-    printf("%i",sub(10,1));
+    printf("temp for mpool call");
     return 0;
 
 }

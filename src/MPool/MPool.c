@@ -6,6 +6,8 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+// will change eventually or use an static defined variable in a function instead of defining
+#define MINIMUM_ALIGN 4
 
 typedef struct block block ;
 typedef struct block{
@@ -60,13 +62,46 @@ typedef struct Pool{
     vblock* head;
 }Pool ;
 
+//general utils to not repeat code that i realized will nedd to do many times
+
+void checkAlign(size_t * align){
+    if (*align<MINIMUM_ALIGN) {
+        *align=alignof(max_align_t);
+    }
+}
+// since a corrected align is asumed to be already used there is no need to do it again unless used directly
+char * createPool(size_t size, size_t align){
+    char* pool =(char *)malloc(size);
+    return pool;
+}
+
+//Arena or linear alocator utils
+
+
+int createArena(ArenaPool * arenaPTR,size_t size,size_t align){
+    //corrects align if necesary
+    checkAlign(&align);
+    char* pool =createPool(size,align);
+    if (pool==NULL) {
+        //could not alocate memory for pool
+        
+        return -1;
+    }
+    ArenaPool arena=*arenaPTR;
+    arena.pool=pool;
+    arena.aviable=pool;
+    arena.psize=size;
+    return 0;
+}
+ArenaPool * createArenaInside(){
+
+    return NULL;
+}
 
 
 
-
-
-
-Pool* createPool(size_t size, size_t align){
+//generic pool utils
+Pool* createGenericPool(size_t size, size_t align){
     if (align<1) {
         //default align
         align=alignof(max_align_t);
@@ -139,6 +174,8 @@ Pool* createExplicitPool(size_t align,int groups_count, ObjGroup groups[]){
     return_pool->head->next=NULL;
     return_pool->head->used=false;
     return_pool->head->size=total-poolsize-node_size;
+
+    return return_pool;
 
 
 }
